@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Create Game</title>
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Font Awesome for icons -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+  <style>
+    /* Custom styles for better spacing */
+    .form-container {
+      max-width: 600px;
+      margin: 0 auto;
+      padding: 20px;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      background-color: #f9f9f9;
+    }
+    .player-input-group {
+      display: flex;
+      align-items: center;
+      margin-bottom: 10px;
+    }
+    .player-input-group select {
+      flex: 1;
+      margin-right: 10px;
+    }
+    .add-player-btn, .remove-player-btn {
+      cursor: pointer;
+      margin-left: 10px;
+    }
+    .add-player-btn {
+      color: #007bff;
+    }
+    .add-player-btn:hover {
+      color: #0056b3;
+    }
+    .remove-player-btn {
+      color: #dc3545;
+    }
+    .remove-player-btn:hover {
+      color: #a71d2a;
+    }
+  </style>
+</head>
+<body class="bg-light">
+  <div class="container py-4">
+    <div class="form-container">
+      <h2 class="text-center mb-4">Create Game</h2>
+      <form id="createGameForm" action="{{ route('game.store') }}" method="POST">
+        @csrf
+        <!-- Date Input Field -->
+            <div class="mb-3">
+                <label for="gameDate" class="form-label">Game Date</label>
+                <input type="date" class="form-control" id="gameDate" name="gameDate" required>
+            </div>
+
+            <!-- Player Dropdown Fields -->
+            <div id="playerFields">
+                <div class="player-input-group">
+                    <select class="form-select" name="players[]" required>
+                        <option value="">Select Player</option>
+                        <option value="player1">Player 1</option>
+                        <option value="player2">Player 2</option>
+                        <option value="player3">Player 3</option>
+                        <option value="player4">Player 4</option>
+                        <option value="player5">Player 5</option>
+                    </select>
+                    <i class="fas fa-plus-circle add-player-btn" onclick="addPlayerField()"></i>
+                </div>
+            </div>
+
+            <!-- Submit Button -->
+            <div class="text-center mt-4">
+                <button type="submit" class="btn btn-primary">Create Game</button>
+            </div>
+        </form>
+    </div>
+  </div>
+
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    // Function to add a new player dropdown field
+    function addPlayerField() {
+        const playerFields = document.getElementById('playerFields');
+
+        // Create a new player input group
+        const newPlayerGroup = document.createElement('div');
+        newPlayerGroup.className = 'player-input-group';
+
+        // Create the dropdown select element
+        const select = document.createElement('select');
+        select.className = 'form-select';
+        select.name = 'players[]'; // Ensure it's an array
+        select.required = true;
+        select.innerHTML = `
+            <option value="">Select Player</option>
+            <option value="player1">Player 1</option>
+            <option value="player2">Player 2</option>
+            <option value="player3">Player 3</option>
+            <option value="player4">Player 4</option>
+            <option value="player5">Player 5</option>
+        `;
+
+        // Create the plus icon
+        const plusIcon = document.createElement('i');
+        plusIcon.className = 'fas fa-plus-circle add-player-btn';
+        plusIcon.onclick = addPlayerField;
+
+        // Create the minus icon
+        const minusIcon = document.createElement('i');
+        minusIcon.className = 'fas fa-minus-circle remove-player-btn';
+        minusIcon.onclick = function () {
+            playerFields.removeChild(newPlayerGroup); // Remove the player field
+        };
+
+        // Append the select, plus icon, and minus icon to the new player group
+        newPlayerGroup.appendChild(select);
+        newPlayerGroup.appendChild(plusIcon);
+        newPlayerGroup.appendChild(minusIcon);
+
+        // Append the new player group to the playerFields container
+        playerFields.appendChild(newPlayerGroup);
+    }
+    // Handle form submission
+    document.getElementById('createGameForm').addEventListener('submit', function (e) {
+      e.preventDefault();
+      alert('Game created successfully!');
+      // You can add further logic here to handle form data submission
+    });
+  </script>
+</body>
+</html>

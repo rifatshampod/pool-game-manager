@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\GameController;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,6 +18,12 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+Route::get('start-game', function () {
+    return view('game/addGame');
+});
+
+Route::get('/create-game', [GameController::class, 'create'])->name('game.create');
+Route::post('/create-game', [GameController::class, 'store'])->name('game.store');
 
 Route::get('/dashboard', function () {
     return view('dashboard');
