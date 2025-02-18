@@ -1,73 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Game Leaderboard</title>
-  <!-- Bootstrap CSS -->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
-  <style>
-    /* Custom styles for better spacing */
-    .logo {
-      max-width: 250px;
-    }
-    .leaderboard-table {
-      margin-top: 20px;
-    }
-
-    /* Coin flip animation */
-    .coin {
-      width: 200px;
-      height: 200px;
-      position: relative;
-      transform-style: preserve-3d;
-      animation: flip 1s ease-out;
-    }
-    .coin .side {
-      width: 100%;
-      height: 100%;
-      position: absolute;
-      backface-visibility: hidden;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 30px;
-      font-weight: bold;
-      border-radius: 50%;
-    }
-    .coin .heads {
-      background-color: gold;
-      transform: rotateY(0deg);
-    }
-    .coin .tails {
-      background-color: silver;
-      transform: rotateY(180deg);
-    }
-    @keyframes flip {
-      0% {
-        transform: rotateY(0deg);
-      }
-      50% {
-        transform: rotateY(600deg); /* Multiple rotations for a realistic flip */
-      }
-      100% {
-        transform: rotateY(0deg);
-      }
-    }
-  </style>
-</head>
+<x-header/>
 <body class="bg-light">
   <div class="container py-4">
     <!-- Logo -->
-    <div class="text-center mb-5">
-      <img src="images/logo.svg" alt="Game Logo" class="logo">
-      <hr>
-    </div>
+    <x-logo/>
 
     <!-- Buttons -->
     <div class="d-flex justify-content-center gap-3 mb-4">
       <button class="btn btn-primary px-5" data-bs-toggle="modal" data-bs-target="#coinTossModal">Toss</button>
-      <button class="btn btn-success px-5">Start Game</button>
+      <a href="{{ route('game.create') }}" class="btn btn-success px-5">Start Game</a>
     </div>
 
     <!-- Leaderboard Table -->
@@ -112,6 +54,49 @@
         </tbody>
       </table>
     </div>
+
+     <h1 class="text-center mb-4" style="color: #2c3e50;">Tournament List</h1>
+
+    <!-- Tournament List Table -->
+    <table class="tournament-table table">
+      <thead>
+        <tr>
+          <th>Date</th>
+          <th>Winner</th>
+          <th>View</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>2023-10-01</td>
+          <td>Player 1</td>
+          <td>
+            <button class="btn btn-view-details">
+              <i class="fas fa-eye"></i> 
+            </button>
+          </td>
+        </tr>
+        <tr>
+          <td>2023-09-25</td>
+          <td>Player 3</td>
+          <td>
+            <button class="btn btn-view-details">
+              <i class="fas fa-eye"></i> 
+            </button>
+          </td>
+        </tr>
+        <tr>
+          <td>2023-09-18</td>
+          <td>Player 5</td>
+          <td>
+            <button class="btn btn-view-details">
+              <i class="fas fa-eye"></i> 
+            </button>
+          </td>
+        </tr>
+        <!-- Add more rows as needed -->
+      </tbody>
+    </table>
   </div>
 
   <!-- Coin Toss Modal -->

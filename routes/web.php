@@ -18,9 +18,8 @@ use App\Http\Controllers\GameController;
 Route::get('/', function () {
     return view('welcome');
 });
-Route::get('start-game', function () {
-    return view('game/addGame');
-});
+
+Route::view('tournament', 'game/tournament');
 
 Route::get('/create-game', [GameController::class, 'create'])->name('game.create');
 Route::post('/create-game', [GameController::class, 'store'])->name('game.store');

@@ -1,0 +1,146 @@
+/* Custom styles for better spacing */
+    .logo {
+      max-width: 250px;
+    }
+    /* Homepage  */
+
+    .leaderboard-table {
+      margin-top: 20px;
+    }
+
+    /* Coin flip animation */
+    .coin {
+      width: 200px;
+      height: 200px;
+      position: relative;
+      transform-style: preserve-3d;
+      animation: flip 1s ease-out;
+    }
+    .coin .side {
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      backface-visibility: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 30px;
+      font-weight: bold;
+      border-radius: 50%;
+    }
+    .coin .heads {
+      background-color: gold;
+      transform: rotateY(0deg);
+    }
+    .coin .tails {
+      background-color: silver;
+      transform: rotateY(180deg);
+    }
+    @keyframes flip {
+      0% {
+        transform: rotateY(0deg);
+      }
+      50% {
+        transform: rotateY(600deg); /* Multiple rotations for a realistic flip */
+      }
+      100% {
+        transform: rotateY(0deg);
+      }
+    }
+    /* Homepage tournament table  */
+    .tournament-table {
+      width: 100%;
+      border-collapse: separate;
+      border-spacing: 0;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+    .tournament-table th, .tournament-table td {
+      text-align: center;
+      padding: 12px;
+    }
+    .tournament-table th {
+      background-color: #2c3e50;
+      color: #fff;
+    }
+    .tournament-table tbody tr:hover {
+      background-color: #f1f1f1;
+    }
+    .btn-view-details {
+      background-color: #3498db;
+      color: #fff;
+      border: none;
+      padding: 8px 16px;
+      border-radius: 4px;
+    }
+    .btn-view-details:hover {
+      background-color: #2980b9;
+    }
+
+    /* Tournament Page  */
+    body {
+      background-color: #f8f9fa;
+    }
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+    .group {
+      margin-bottom: 30px;
+      background-color: #fff;
+      border-radius: 8px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      padding: 20px;
+    }
+    .group h3 {
+      margin-bottom: 20px;
+      color: #2c3e50;
+      font-weight: bold;
+    }
+    .fixture-table, .scoreboard-table {
+      width: 100%;
+      margin-bottom: 20px;
+      border-collapse: separate;
+      border-spacing: 0;
+      border-radius: 8px;
+      overflow: hidden;
+    }
+    .fixture-table th, .scoreboard-table th {
+      background-color: #2c3e50;
+      color: #fff;
+      text-align: center;
+      padding: 12px;
+    }
+    .fixture-table td, .scoreboard-table td {
+      text-align: center;
+      padding: 12px;
+      border-bottom: 1px solid #ddd;
+    }
+    .fixture-table tbody tr:hover, .scoreboard-table tbody tr:hover {
+      background-color: #f1f1f1;
+    }
+    .btn-primary {
+      background-color: #058c17;
+      border: none;
+      padding: 8px 16px;
+      border-radius: 4px;
+    }
+    .btn-primary:hover {
+      background-color: #17ccd9;
+    }
+    .modal-header {
+      background-color: #2c3e50;
+      color: #fff;
+    }
+    .modal-header .btn-close {
+      filter: invert(1);
+    }
+    .modal-footer .btn-secondary {
+      background-color: #95a5a6;
+      border: none;
+    }
+    .modal-footer .btn-secondary:hover {
+      background-color: #7f8c8d;
+    }
