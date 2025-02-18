@@ -1,52 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Create Game</title>
-  <!-- Bootstrap CSS -->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
-  <!-- Font Awesome for icons -->
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
-  <style>
-    /* Custom styles for better spacing */
-    .form-container {
-      max-width: 600px;
-      margin: 0 auto;
-      padding: 20px;
-      border: 1px solid #ddd;
-      border-radius: 8px;
-      background-color: #f9f9f9;
-    }
-    .player-input-group {
-      display: flex;
-      align-items: center;
-      margin-bottom: 10px;
-    }
-    .player-input-group select {
-      flex: 1;
-      margin-right: 10px;
-    }
-    .add-player-btn, .remove-player-btn {
-      cursor: pointer;
-      margin-left: 10px;
-    }
-    .add-player-btn {
-      color: #007bff;
-    }
-    .add-player-btn:hover {
-      color: #0056b3;
-    }
-    .remove-player-btn {
-      color: #dc3545;
-    }
-    .remove-player-btn:hover {
-      color: #a71d2a;
-    }
-  </style>
-</head>
+<x-header/>
 <body class="bg-light">
   <div class="container py-4">
+    <x-logo/>
     <div class="form-container">
       <h2 class="text-center mb-4">Create Game</h2>
       <form id="createGameForm" action="{{ route('game.store') }}" method="POST">
@@ -55,6 +12,10 @@
             <div class="mb-3">
                 <label for="gameDate" class="form-label">Game Date</label>
                 <input type="date" class="form-control" id="gameDate" name="gameDate" required>
+            </div>
+            <div class="mb-3">
+                <label for="gameDate" class="form-label">Number of Boards</label>
+                <input type="number" class="form-control" id="gameDate" name="board_number" required value=2>
             </div>
 
             <!-- Player Dropdown Fields -->

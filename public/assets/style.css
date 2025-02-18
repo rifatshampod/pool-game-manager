@@ -144,3 +144,39 @@
     .modal-footer .btn-secondary:hover {
       background-color: #7f8c8d;
     }
+
+    /* Create Tournament Page  */
+    /* Custom styles for better spacing */
+    .form-container {
+      max-width: 600px;
+      margin: 0 auto;
+      padding: 20px;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      background-color: #f9f9f9;
+    }
+    .player-input-group {
+      display: flex;
+      align-items: center;
+      margin-bottom: 10px;
+    }
+    .player-input-group select {
+      flex: 1;
+      margin-right: 10px;
+    }
+    .add-player-btn, .remove-player-btn {
+      cursor: pointer;
+      margin-left: 10px;
+    }
+    .add-player-btn {
+      color: #007bff;
+    }
+    .add-player-btn:hover {
+      color: #0056b3;
+    }
+    .remove-player-btn {
+      color: #dc3545;
+    }
+    .remove-player-btn:hover {
+      color: #a71d2a;
+    }
