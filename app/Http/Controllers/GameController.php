@@ -9,6 +9,7 @@ use App\Models\Player;
 use App\Models\Round;
 use App\Models\Score;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class GameController extends Controller
 {
@@ -185,11 +186,11 @@ class GameController extends Controller
 
         // Fetch the match
         $match = MatchGame::findOrFail($matchId);
-        
+
         // Save the scores for Player 1
         Score::updateOrCreate(
             [
-                'match_game_id' => $matchId, // Add match_game_id here
+                'match_game_id' => $matchId,
                 'player_id' => $match->player1_id,
             ],
             [
@@ -200,7 +201,7 @@ class GameController extends Controller
         // Save the scores for Player 2
         Score::updateOrCreate(
             [
-                'match_game_id' => $matchId, // Add match_game_id here
+                'match_game_id' => $matchId,
                 'player_id' => $match->player2_id,
             ],
             [
@@ -215,13 +216,156 @@ class GameController extends Controller
         } elseif ($request->input('player2_score') > $request->input('player1_score')) {
             $winnerId = $match->player2_id;
         }
+        if($match->round==3){
+            $game = Game::where('match_id', $matchId)->first();
+            $game->winner_id = $winnerId;
+            $game->update();
+        }
 
-        $matchScore = $request->input('player1_score').'-'.$request->input('player2_score');
+        // Format the scores as a string (e.g., "2-7")
+        $scoresText = $request->input('player1_score') . '-' . $request->input('player2_score');
 
-        // Update the winner_id in the match_games table
-        $match->update(['winner_id' => $winnerId, 'scores'=>$matchScore]);
+        // Update the match_games table
+        $match->update([
+            'winner_id' => $winnerId,
+            'scores' => $scoresText, // Update the scores column
+        ]);
+
+        // Check if all group stage matches are completed
+        if ($match->round_id == 1) { // Group stage round
+            $this->checkAndCreateSemiFinalMatches($match->game_id);
+        }
+
+        // Check if all semi-final matches are completed
+        if ($match->round_id == 2) { // Semi-final round
+            $this->checkAndCreateFinalMatch($match->game_id);
+        }
 
         // Redirect back with a success message
         return redirect()->back()->with('success', 'Score saved successfully!');
+    }
+
+    // Helper function to check and create semi-final matches
+    private function checkAndCreateSemiFinalMatches($gameId)
+    {
+        // Fetch all group stage matches for the game
+        $groupStageMatches = MatchGame::where('game_id', $gameId)
+            ->where('round_id', 1) // Group stage round
+            ->get();
+
+        // Check if all group stage matches have scores
+        $allMatchesCompleted = true;
+        foreach ($groupStageMatches as $match) {
+            // Check if the scores column is empty or null
+            if (empty($match->scores)) {
+                $allMatchesCompleted = false;
+                break;
+            }
+        }
+
+        // If all group stage matches are completed, create semi-final matches
+        if ($allMatchesCompleted) {
+            $this->movetoSemiFinalMatches($gameId);
+        }
+    }
+
+    // Helper function to create semi-final matches
+    private function movetoSemiFinalMatches($gameId)
+    {
+        // Fetch all groups for the game
+        $groups = Group::where('game_id', $gameId)->get();
+
+        // Array to store top players from each group
+        $topPlayers = [];
+
+        // Determine the top 2 players from each group
+        foreach ($groups as $group) {
+            // Fetch all players in the group with their total points
+            $players = DB::table('scores')
+                ->join('match_games', 'scores.match_game_id', '=', 'match_games.id')
+                ->where('match_games.group_id', $group->id)
+                ->select('scores.player_id', DB::raw('SUM(scores.score) as total_points'))
+                ->groupBy('scores.player_id')
+                ->orderByDesc('total_points')
+                ->limit(2) // Top 2 players
+                ->get();
+
+            // Add the top players to the array
+            foreach ($players as $player) {
+                $topPlayers[] = $player->player_id;
+            }
+        }
+
+        // Create semi-final matches
+        if (count($topPlayers) >= 4) {
+            // Semi-final 1: Top 1 from Group A vs Top 2 from Group B
+            MatchGame::create([
+                'game_id' => $gameId,
+                'round_id' => 2, // Semi-final round
+                'player1_id' => $topPlayers[0], // Top 1 from Group A
+                'player2_id' => $topPlayers[3], // Top 2 from Group B
+            ]);
+
+            // Semi-final 2: Top 2 from Group A vs Top 1 from Group B
+            MatchGame::create([
+                'game_id' => $gameId,
+                'round_id' => 2, // Semi-final round
+                'player1_id' => $topPlayers[1], // Top 2 from Group A
+                'player2_id' => $topPlayers[2], // Top 1 from Group B
+            ]);
+        }
+    }
+
+    // Helper function to check and create final match
+    private function checkAndCreateFinalMatch($gameId)
+    {
+        // Fetch all semi-final matches for the game
+        $semiFinalMatches = MatchGame::where('game_id', $gameId)
+            ->where('round_id', 2) // Semi-final round
+            ->get();
+
+        // Check if all semi-final matches have scores
+        $allMatchesCompleted = true;
+        foreach ($semiFinalMatches as $match) {
+            // Check if the scores column is empty or null
+            if (empty($match->scores)) {
+                $allMatchesCompleted = false;
+                break;
+            }
+        }
+
+        // If all semi-final matches are completed, create final match
+        if ($allMatchesCompleted) {
+            $this->movetoFinalMatch($gameId);
+        }
+    }
+
+    // Helper function to create final match
+    private function movetoFinalMatch($gameId)
+    {
+        // Fetch all semi-final matches for the game
+        $semiFinalMatches = MatchGame::where('game_id', $gameId)
+            ->where('round_id', 2) // Semi-final round
+            ->get();
+
+        // Array to store winners of semi-final matches
+        $winners = [];
+
+        // Fetch the winners of the semi-final matches
+        foreach ($semiFinalMatches as $match) {
+            if ($match->winner_id) {
+                $winners[] = $match->winner_id;
+            }
+        }
+
+        // Create final match if there are 2 winners
+        if (count($winners) == 2) {
+            MatchGame::create([
+                'game_id' => $gameId,
+                'round_id' => 3, // Final round
+                'player1_id' => $winners[0], // Winner of Semi-final 1
+                'player2_id' => $winners[1], // Winner of Semi-final 2
+            ]);
+        }
     }
 }

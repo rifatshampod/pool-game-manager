@@ -73,8 +73,8 @@
                   <td>{{ $match->player1->name }}</td>
                   <td>{{ $match->player2->name }}</td>
                   <td>
-                    @if ($match->scores->isNotEmpty())
-                      {{ $match->scores->first()->player1_score }} - {{ $match->scores->first()->player2_score }}
+                    @if ($match->scores)
+                      {{ $match->scores }}
                     @else
                       <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#scoreModal{{ $match->id }}">
                         <i class="fas fa-plus"></i> 
@@ -106,8 +106,8 @@
                   <td>{{ $match->player1->name }}</td>
                   <td>{{ $match->player2->name }}</td>
                   <td>
-                    @if ($match->scores->isNotEmpty())
-                      {{ $match->scores->first()->player1_score }} - {{ $match->scores->first()->player2_score }}
+                    @if ($match->scores)
+                      {{ $match->scores }}
                     @else
                       <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#scoreModal{{ $match->id }}">
                         <i class="fas fa-plus"></i> 
