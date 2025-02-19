@@ -23,4 +23,10 @@ class Group extends Model
     {
         return $this->belongsToMany(Player::class, 'group_players');
     }
+
+    // many match can have one group 
+    public function matches()
+    {
+        return $this->hasMany(MatchGame::class);
+    }
 }

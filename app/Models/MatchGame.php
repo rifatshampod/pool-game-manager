@@ -9,7 +9,7 @@ class MatchGame extends Model
 {
     use HasFactory;
     
-    protected $fillable = ['game_id', 'round_id', 'player1_id', 'player2_id', 'winner_id'];
+    protected $fillable = ['game_id', 'round_id', 'group_id', 'player1_id', 'player2_id', 'winner_id'];
 
     // A match belongs to a game
     public function game()
@@ -31,7 +31,13 @@ class MatchGame extends Model
     // Match of which Round 
     public function round()
     {
-        return $this->belongsTo(Round::class, 'id');
+        return $this->belongsTo(Round::class, 'round_id');
+    }
+
+    // Match of which Group 
+    public function group()
+    {
+        return $this->belongsTo(Group::class, 'group_id');
     }
 
     // A match has one winner (player)

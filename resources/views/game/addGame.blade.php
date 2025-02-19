@@ -15,7 +15,7 @@
             </div>
             <div class="mb-3">
                 <label for="boardNumber" class="form-label">Number of Boards</label>
-                <input type="number" class="form-control" id="boardNumber" name="board_number" required value=2>
+                <input type="number" class="form-control" id="boardNumber" name="boardNumber" required value=2>
             </div>
 
             <!-- Player Dropdown Fields -->
@@ -24,11 +24,9 @@
                 <div class="player-input-group">
                     <select class="form-select" name="players[]" required>
                         <option value="">Select Player</option>
-                        <option value="player1">Player 1</option>
-                        <option value="player2">Player 2</option>
-                        <option value="player3">Player 3</option>
-                        <option value="player4">Player 4</option>
-                        <option value="player5">Player 5</option>
+                        @foreach ($playerList as $item)
+                        <option value="{{$item->id}}">{{$item->name}}</option>
+                        @endforeach
                     </select>
                     <i class="fas fa-plus-circle add-player-btn" onclick="addPlayerField()"></i>
                 </div>
@@ -45,54 +43,52 @@
   <!-- Bootstrap JS -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
   <script>
-    // Function to add a new player dropdown field
-    function addPlayerField() {
-        const playerFields = document.getElementById('playerFields');
+  // Function to add a new player dropdown field
+  function addPlayerField() {
+      const playerFields = document.getElementById('playerFields');
 
-        // Create a new player input group
-        const newPlayerGroup = document.createElement('div');
-        newPlayerGroup.className = 'player-input-group';
+      // Create a new player input group
+      const newPlayerGroup = document.createElement('div');
+      newPlayerGroup.className = 'player-input-group';
 
-        // Create the dropdown select element
-        const select = document.createElement('select');
-        select.className = 'form-select';
-        select.name = 'players[]'; // Ensure it's an array
-        select.required = true;
-        select.innerHTML = `
-            <option value="">Select Player</option>
-            <option value="player1">Player 1</option>
-            <option value="player2">Player 2</option>
-            <option value="player3">Player 3</option>
-            <option value="player4">Player 4</option>
-            <option value="player5">Player 5</option>
-        `;
+      // Create the dropdown select element
+      const select = document.createElement('select');
+      select.className = 'form-select';
+      select.name = 'players[]'; // Ensure it's an array
+      select.required = true;
 
-        // Create the plus icon
-        const plusIcon = document.createElement('i');
-        plusIcon.className = 'fas fa-plus-circle add-player-btn';
-        plusIcon.onclick = addPlayerField;
+      // Dynamically generate player options using Blade templating
+      const playerOptions = `
+          <option value="">Select Player</option>
+          @foreach ($playerList as $item)
+              <option value="{{ $item->id }}">{{ $item->name }}</option>
+          @endforeach
+      `;
+      select.innerHTML = playerOptions;
 
-        // Create the minus icon
-        const minusIcon = document.createElement('i');
-        minusIcon.className = 'fas fa-minus-circle remove-player-btn';
-        minusIcon.onclick = function () {
-            playerFields.removeChild(newPlayerGroup); // Remove the player field
-        };
+      // Create the plus icon
+      const plusIcon = document.createElement('i');
+      plusIcon.className = 'fas fa-plus-circle add-player-btn';
+      plusIcon.onclick = addPlayerField;
 
-        // Append the select, plus icon, and minus icon to the new player group
-        newPlayerGroup.appendChild(select);
-        newPlayerGroup.appendChild(plusIcon);
-        newPlayerGroup.appendChild(minusIcon);
+      // Create the minus icon
+      const minusIcon = document.createElement('i');
+      minusIcon.className = 'fas fa-minus-circle remove-player-btn';
+      minusIcon.onclick = function () {
+          playerFields.removeChild(newPlayerGroup); // Remove the player field
+      };
 
-        // Append the new player group to the playerFields container
-        playerFields.appendChild(newPlayerGroup);
-    }
-    // Handle form submission
-    document.getElementById('createGameForm').addEventListener('submit', function (e) {
-      e.preventDefault();
-      alert('Game created successfully!');
-      // You can add further logic here to handle form data submission
-    });
-  </script>
+      // Append the select, plus icon, and minus icon to the new player group
+      newPlayerGroup.appendChild(select);
+      newPlayerGroup.appendChild(plusIcon);
+      newPlayerGroup.appendChild(minusIcon);
+
+      // Append the new player group to the playerFields container
+      playerFields.appendChild(newPlayerGroup);
+  }
+
+  // Handle form submission
+  
+</script>
 </body>
 </html>
