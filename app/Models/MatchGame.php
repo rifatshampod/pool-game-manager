@@ -28,18 +28,17 @@ class MatchGame extends Model
         return $this->belongsTo(Player::class, 'player2_id');
     }
 
+    // Match of which Round 
+    public function round()
+    {
+        return $this->belongsTo(Round::class, 'id');
+    }
+
     // A match has one winner (player)
     public function winner()
     {
         return $this->belongsTo(Player::class, 'winner_id');
     }
-
-    // A match has one round
-    public function round()
-    {
-        return $this->belongsTo(Round::class, 'winner_id');
-    }
-
 
     // A match has many scores
     public function scores()

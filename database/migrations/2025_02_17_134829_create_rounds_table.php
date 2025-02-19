@@ -13,6 +13,8 @@ return new class extends Migration
     {
         Schema::create('rounds', function (Blueprint $table) {
             $table->id();
+            $table->string('name');
+            $table->integer('position');
             $table->timestamps();
         });
     }
