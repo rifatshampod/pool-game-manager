@@ -27,8 +27,8 @@
               <thead>
                 <tr>
                   <th>#</th>
-                  <th>Player 1</th>
-                  <th>Player 2</th>
+                  <th><i class="fa-regular fa-circle-dot"></i> P1</th>
+                  <th>P2</th>
                   <th>Score</th>
                 </tr>
               </thead>
@@ -39,11 +39,11 @@
                     <td>{{ $match->player1->name }}</td>
                     <td>{{ $match->player2->name }}</td>
                     <td>
-                      @if ($match->scores->isNotEmpty())
-                        {{ $match->scores->first()->player1_score }} - {{ $match->scores->first()->player2_score }}
+                      @if ($match->scores)
+                        {{ $match->scores }}
                       @else
                         <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#scoreModal{{ $match->id }}">
-                          <i class="fas fa-plus"></i> Add Score
+                          <i class="fas fa-plus"></i> 
                         </button>
                       @endif
                     </td>
@@ -62,8 +62,8 @@
           <table class="fixture-table table">
             <thead>
               <tr>
-                <th>Player 1</th>
-                <th>Player 2</th>
+                <th><i class="fa-regular fa-circle-dot"></i> P1</th>
+                <th>P2</th>
                 <th>Score</th>
               </tr>
             </thead>
@@ -77,7 +77,7 @@
                       {{ $match->scores->first()->player1_score }} - {{ $match->scores->first()->player2_score }}
                     @else
                       <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#scoreModal{{ $match->id }}">
-                        <i class="fas fa-plus"></i> Add Score
+                        <i class="fas fa-plus"></i> 
                       </button>
                     @endif
                   </td>
@@ -95,8 +95,8 @@
           <table class="fixture-table table">
             <thead>
               <tr>
-                <th>Player 1</th>
-                <th>Player 2</th>
+                <th><i class="fa-regular fa-circle-dot"></i> P1</th>
+                <th>P2</th>
                 <th>Score</th>
               </tr>
             </thead>
@@ -110,7 +110,7 @@
                       {{ $match->scores->first()->player1_score }} - {{ $match->scores->first()->player2_score }}
                     @else
                       <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#scoreModal{{ $match->id }}">
-                        <i class="fas fa-plus"></i> Add Score
+                        <i class="fas fa-plus"></i> 
                       </button>
                     @endif
                   </td>
@@ -159,21 +159,21 @@
               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-              {{-- <form action="{{ route('match.updateScore', $match->id) }}" method="POST">
+              <form action="{{ route('match.updateScore', $match->id) }}" method="POST">
                 @csrf
                 <div class="mb-3">
-                  <label for="player1_score" class="form-label">Player 1 Score</label>
+                  <label for="player1_score" class="form-label">{{ $match->player1->name }} Score</label>
                   <input type="number" class="form-control" id="player1_score" name="player1_score" required>
                 </div>
                 <div class="mb-3">
-                  <label for="player2_score" class="form-label">Player 2 Score</label>
+                  <label for="player2_score" class="form-label">{{ $match->player2->name }} Score</label>
                   <input type="number" class="form-control" id="player2_score" name="player2_score" required>
                 </div>
                 <div class="modal-footer">
                   <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                   <button type="submit" class="btn btn-primary">Save Score</button>
                 </div>
-              </form> --}}
+              </form>
             </div>
           </div>
         </div>

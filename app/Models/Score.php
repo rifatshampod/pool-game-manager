@@ -9,7 +9,7 @@ class Score extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['match_id', 'player_id', 'score'];
+    protected $fillable = ['match_game_id', 'player_id', 'score'];
 
     // A score belongs to a match
     public function match()

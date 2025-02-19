@@ -9,7 +9,7 @@ class MatchGame extends Model
 {
     use HasFactory;
     
-    protected $fillable = ['game_id', 'round_id', 'group_id', 'player1_id', 'player2_id', 'winner_id'];
+    protected $fillable = ['game_id', 'round_id', 'group_id', 'player1_id', 'player2_id','scores', 'winner_id'];
 
     // A match belongs to a game
     public function game()

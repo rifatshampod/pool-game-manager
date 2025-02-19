@@ -139,38 +139,89 @@ class GameController extends Controller
     }
 
     public function showTournament($gameId)
-{
-    // Fetch the game data
-    $game = Game::findOrFail($gameId);
+    {
+        // Fetch the game data
+        $game = Game::findOrFail($gameId);
 
-    // Fetch all matches for the game with their scores
-    $matches = MatchGame::where('game_id', $gameId)
-        ->with(['player1', 'player2', 'winner', 'scores'])
-        ->get();
+        // Fetch all matches for the game with their scores
+        $matches = MatchGame::where('game_id', $gameId)
+            ->with(['player1', 'player2', 'winner', 'scores'])
+            ->get();
 
-    // Fetch all groups for the game
-    $groups = Group::where('game_id', $gameId)->get();
+        // Fetch all groups for the game
+        $groups = Group::where('game_id', $gameId)->get();
 
-    // Fetch all rounds
-    $rounds = Round::all();
+        // Fetch all rounds
+        $rounds = Round::all();
 
-    // Determine if there are any group stage matches
-    $hasGroupStageMatches = $matches->where('round_id', 1)->isNotEmpty();
+        // Determine if there are any group stage matches
+        $hasGroupStageMatches = $matches->where('round_id', 1)->isNotEmpty();
 
-    // Determine if there are any semi-final matches
-    $hasSemiFinalMatches = $matches->where('round_id', 2)->isNotEmpty();
+        // Determine if there are any semi-final matches
+        $hasSemiFinalMatches = $matches->where('round_id', 2)->isNotEmpty();
 
-    // Determine if there is a final match
-    $hasFinalMatch = $matches->where('round_id', 3)->isNotEmpty();
+        // Determine if there is a final match
+        $hasFinalMatch = $matches->where('round_id', 3)->isNotEmpty();
 
-    // Determine the winner if the final match is completed
-    $winner = null;
-    $finalMatch = $matches->where('round_id', 3)->first();
-    if ($finalMatch && $finalMatch->winner_id) {
-        $winner = $finalMatch->winner;
+        // Determine the winner if the final match is completed
+        $winner = null;
+        $finalMatch = $matches->where('round_id', 3)->first();
+        if ($finalMatch && $finalMatch->winner_id) {
+            $winner = $finalMatch->winner;
+        }
+
+        // Pass the data to the view
+        return view('game.tournament', compact('game', 'matches', 'groups', 'rounds', 'hasGroupStageMatches', 'hasSemiFinalMatches', 'hasFinalMatch', 'winner'));
     }
 
-    // Pass the data to the view
-    return view('game.tournament', compact('game', 'matches', 'groups', 'rounds', 'hasGroupStageMatches', 'hasSemiFinalMatches', 'hasFinalMatch', 'winner'));
-}
+    //Group Stage Score update
+    public function updateScore(Request $request, $matchId)
+    {
+        // Validate the request
+        $request->validate([
+            'player1_score' => 'required|integer|min:0',
+            'player2_score' => 'required|integer|min:0',
+        ]);
+
+        // Fetch the match
+        $match = MatchGame::findOrFail($matchId);
+        
+        // Save the scores for Player 1
+        Score::updateOrCreate(
+            [
+                'match_game_id' => $matchId, // Add match_game_id here
+                'player_id' => $match->player1_id,
+            ],
+            [
+                'score' => $request->input('player1_score'),
+            ]
+        );
+
+        // Save the scores for Player 2
+        Score::updateOrCreate(
+            [
+                'match_game_id' => $matchId, // Add match_game_id here
+                'player_id' => $match->player2_id,
+            ],
+            [
+                'score' => $request->input('player2_score'),
+            ]
+        );
+
+        // Determine the winner
+        $winnerId = null;
+        if ($request->input('player1_score') > $request->input('player2_score')) {
+            $winnerId = $match->player1_id;
+        } elseif ($request->input('player2_score') > $request->input('player1_score')) {
+            $winnerId = $match->player2_id;
+        }
+
+        $matchScore = $request->input('player1_score').'-'.$request->input('player2_score');
+
+        // Update the winner_id in the match_games table
+        $match->update(['winner_id' => $winnerId, 'scores'=>$matchScore]);
+
+        // Redirect back with a success message
+        return redirect()->back()->with('success', 'Score saved successfully!');
+    }
 }
