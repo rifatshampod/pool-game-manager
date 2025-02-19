@@ -14,12 +14,13 @@
                 <input type="date" class="form-control" id="gameDate" name="gameDate" required>
             </div>
             <div class="mb-3">
-                <label for="gameDate" class="form-label">Number of Boards</label>
-                <input type="number" class="form-control" id="gameDate" name="board_number" required value=2>
+                <label for="boardNumber" class="form-label">Number of Boards</label>
+                <input type="number" class="form-control" id="boardNumber" name="board_number" required value=2>
             </div>
 
             <!-- Player Dropdown Fields -->
             <div id="playerFields">
+              <label for="gameDate" class="form-label">Players</label>
                 <div class="player-input-group">
                     <select class="form-select" name="players[]" required>
                         <option value="">Select Player</option>
