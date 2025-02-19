@@ -71,7 +71,6 @@ class GameController extends Controller
         } elseif ($totalPlayers == 4) {
             // Two semi-final matches and one final match
             $this->createSemiFinalMatches($game, $players);
-            $this->createFinalMatch($game, $players);
         } else {
             // More than 4 players, create group stage matches first
             $this->createGroupStageMatches($game, $groups);
