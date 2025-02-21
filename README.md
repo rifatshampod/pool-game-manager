@@ -74,15 +74,15 @@ Once installed, the app works offline, thanks to the **service worker**. You can
 
 ### Homepage
 
-![Homepage](screenshots/homepage.png)
+![Homepage](screenshots/khelahobe_home.png)
 
 ### Tournament Page
 
-![Tournament Page](screenshots/tournament.png)
+![Tournament Page](screenshots/view-tournament.webm)
 
-### Leaderboard
+### Starting a Tournament
 
-![Leaderboard](screenshots/leaderboard.png)
+![Leaderboard](screenshots/start-tournament.webm)
 
 ## Contributing 🤝
 
