@@ -3,6 +3,7 @@ self.addEventListener("install", (event) => {
         caches.open("static-cache").then((cache) => {
             return cache.addAll([
                 "/assets/style.css",
+                "/",
             ]);
         })
     );

@@ -169,6 +169,7 @@ class GameController extends Controller
         $finalMatch = $matches->where('round_id', 3)->first();
         if ($finalMatch && $finalMatch->winner_id) {
             $winner = $finalMatch->winner;
+
         }
 
         // Pass the data to the view
@@ -213,14 +214,20 @@ class GameController extends Controller
         $winnerId = null;
         if ($request->input('player1_score') > $request->input('player2_score')) {
             $winnerId = $match->player1_id;
+            if($match->round==3){
+                $game = Game::where('match_id', $matchId)->first();
+                $game->winner_id = $winnerId;
+                $game->update();
+            }
         } elseif ($request->input('player2_score') > $request->input('player1_score')) {
             $winnerId = $match->player2_id;
+            if($match->round==3){
+                $game = Game::where('match_id', $matchId)->first();
+                $game->winner_id = $winnerId;
+                $game->update();
+            }
         }
-        if($match->round==3){
-            $game = Game::where('match_id', $matchId)->first();
-            $game->winner_id = $winnerId;
-            $game->update();
-        }
+        
 
         // Format the scores as a string (e.g., "2-7")
         $scoresText = $request->input('player1_score') . '-' . $request->input('player2_score');
