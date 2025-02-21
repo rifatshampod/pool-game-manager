@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Game;
+use App\Models\Player;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -23,5 +24,21 @@ class HomeController extends Controller
 
         // Pass the data to the view
         return view('welcome', compact('tournaments', 'leaderboard'));
+    }
+
+    public function storePlayer(Request $request)
+    {
+        // Validate the request
+        $request->validate([
+            'name' => 'required|string|max:255',
+        ]);
+
+        // Save the player to the database
+        Player::create([
+            'name' => $request->input('name'),
+        ]);
+
+        // Redirect back with a success message
+        return redirect()->back()->with('success', 'Player added successfully!');
     }
 }

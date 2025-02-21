@@ -19,6 +19,9 @@ use App\Http\Controllers\HomeController;
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::view('tournament', 'game/tournament');
 
+//create player
+Route::post('/players', [HomeController::class, 'storePlayer'])->name('player.store');
+
 Route::get('/create-game', [GameController::class, 'create'])->name('game.create');
 Route::post('/create-game', [GameController::class, 'store'])->name('game.store');
 Route::get('/tournament={game}', [GameController::class, 'showTournament'])->name('tournament.show');

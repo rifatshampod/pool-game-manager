@@ -9,8 +9,13 @@
     <!-- Buttons -->
     <div class="d-flex justify-content-center gap-3 mb-4">
       {{-- <button class="btn btn-primary px-5" data-bs-toggle="modal" data-bs-target="#coinTossModal">Toss</button> --}}
-      <a href="{{ route('game.create') }}" class="btn btn-success px-5 w-100">Start Game</a>
+      <a href="{{ route('game.create') }}" class="btn btn-success px-5 py-3 w-100">Start Game</a>
     </div>
+
+    <!-- Add Player Button -->
+    <button type="button" class="btn btn-warning mb-4 w-100" data-bs-toggle="modal" data-bs-target="#addPlayerModal">
+        <i class="fas fa-plus"></i> Add Player
+    </button>
 
     <!-- Leaderboard Table -->
     <div class="text-center">
@@ -68,6 +73,31 @@
           @endforeach
       </tbody>
   </table>
+  </div>
+
+  <!-- Add Player Modal -->
+  <div class="modal fade" id="addPlayerModal" tabindex="-1" aria-labelledby="addPlayerModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+          <div class="modal-content">
+              <div class="modal-header">
+                  <h5 class="modal-title" id="addPlayerModalLabel">Add New Player</h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+                  <form id="addPlayerForm" action="{{ route('player.store') }}" method="POST">
+                      @csrf
+                      <div class="mb-3">
+                          <label for="playerName" class="form-label">Player Name</label>
+                          <input type="text" class="form-control" id="playerName" name="name" required>
+                      </div>
+                      <div class="modal-footer">
+                          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                          <button type="submit" class="btn btn-primary">Save Player</button>
+                      </div>
+                  </form>
+              </div>
+          </div>
+      </div>
   </div>
 
   <!-- Coin Toss Modal -->
