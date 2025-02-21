@@ -78,11 +78,11 @@ Once installed, the app works offline, thanks to the **service worker**. You can
 
 ### Tournament Page
 
-![Tournament Page](public/screenshots/view-tournament.webm)
+![Tournament Page](public/screenshots/view-tournament.gif)
 
 ### Starting a Tournament
 
-![Leaderboard](public/screenshots/start-tournament.webm)
+![Leaderboard](public/screenshots/start-tournament.gif)
 
 ## Contributing 🤝
 
