@@ -8,15 +8,18 @@
 
     <!-- Buttons -->
     <div class="d-flex justify-content-center gap-3 mb-4">
-      <button class="btn btn-primary px-5" data-bs-toggle="modal" data-bs-target="#coinTossModal">Toss</button>
-      <a href="{{ route('game.create') }}" class="btn btn-success px-5">Start Game</a>
+      {{-- <button class="btn btn-primary px-5" data-bs-toggle="modal" data-bs-target="#coinTossModal">Toss</button> --}}
+      <a href="{{ route('game.create') }}" class="btn btn-success px-5 w-100">Start Game</a>
     </div>
 
     <!-- Leaderboard Table -->
     <div class="text-center">
         <h3>Leaderboard</h3>
     </div>
-    <div class="table-responsive leaderboard-table">
+    <div>
+      Coming Soon!
+    </div>
+    {{-- <div class="table-responsive leaderboard-table">
       <table class="table table-bordered table-hover shadow">
         <thead class="table-dark">
           <tr>
@@ -53,50 +56,39 @@
           </tr>
         </tbody>
       </table>
-    </div>
+    </div> --}}
 
      <h1 class="text-center mb-4" style="color: #2c3e50;">Tournament List</h1>
 
     <!-- Tournament List Table -->
     <table class="tournament-table table">
       <thead>
-        <tr>
-          <th>Date</th>
-          <th>Winner</th>
-          <th>View</th>
-        </tr>
+          <tr>
+              <th>Date</th>
+              <th>Winner</th>
+              <th>View</th>
+          </tr>
       </thead>
       <tbody>
-        <tr>
-          <td>2023-10-01</td>
-          <td>Player 1</td>
-          <td>
-            <button class="btn btn-view-details">
-              <i class="fas fa-eye"></i> 
-            </button>
-          </td>
-        </tr>
-        <tr>
-          <td>2023-09-25</td>
-          <td>Player 3</td>
-          <td>
-            <button class="btn btn-view-details">
-              <i class="fas fa-eye"></i> 
-            </button>
-          </td>
-        </tr>
-        <tr>
-          <td>2023-09-18</td>
-          <td>Player 5</td>
-          <td>
-            <button class="btn btn-view-details">
-              <i class="fas fa-eye"></i> 
-            </button>
-          </td>
-        </tr>
-        <!-- Add more rows as needed -->
+          @foreach ($tournaments as $tournament)
+              <tr>
+                  <td>{{ $tournament->date }}</td>
+                  <td>
+                      @if ($tournament->winner)
+                          {{ $tournament->winner->name }}
+                      @else
+                          N/A
+                      @endif
+                  </td>
+                  <td>
+                      <a href="{{ route('tournament.show', $tournament->id) }}" class="btn btn-view-details">
+                          <i class="fas fa-eye"></i>
+                      </a>
+                  </td>
+              </tr>
+          @endforeach
       </tbody>
-    </table>
+  </table>
   </div>
 
   <!-- Coin Toss Modal -->
