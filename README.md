@@ -1,66 +1,103 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Pool Billiard Tournament Tracker 🎱
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+Welcome to the **Pool Billiard Tournament Tracker**! This project was born out of the need to organize friendly pool billiard competitions among friends. With limited boards available, we wanted a way to track scores, manage tournaments, and determine winners without the hassle of manual tracking. This software solution makes it easy to organize and enjoy our weekly pool sessions!
 
-## About Laravel
+## Features ✨
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+-   **Tournament Management**: Create and manage tournaments with ease.
+-   **Score Tracking**: Track scores for each match and determine winners automatically.
+-   **Mobile-Responsive Design**: Access the app on any device, whether it's a smartphone, tablet, or desktop.
+-   **Progressive Web App (PWA)**: Install the app on your device for offline access and a native app-like experience.
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## Why This Project? 🤔
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+Every week, my friends and I gather to play pool billiard. However, with limited boards available, it became challenging to keep track of scores and determine winners. This project was created to:
 
-## Learning Laravel
+-   Automate score tracking and tournament management.
+-   Eliminate the need for manual scorekeeping.
+-   Make our weekly pool sessions more organized and enjoyable.
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+## Mobile-Responsive Design 📱
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+The app is designed to be fully **mobile-responsive**, ensuring a seamless experience across all devices. Whether you're using a smartphone, tablet, or desktop, the app adapts to your screen size, making it easy to:
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 2000 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+-   Create tournaments.
+-   Add players and scores.
+-   View the leaderboard and tournament results.
 
-## Laravel Sponsors
+## Progressive Web App (PWA) 🌐
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+The app is a **Progressive Web App (PWA)**, which means you can install it on your device for offline access and a native app-like experience. Here's how to use it:
 
-### Premium Partners
+### Install the App
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[OP.GG](https://op.gg)**
-- **[WebReinvent](https://webreinvent.com/?utm_source=laravel&utm_medium=github&utm_campaign=patreon-sponsors)**
-- **[Lendio](https://lendio.com)**
+1. Open the app in your browser (Chrome, Edge, or Safari).
+2. Click the **Install** button (or the "Add to Home Screen" option in the browser menu).
+3. The app will be installed on your device, and you can access it like a native app.
 
-## Contributing
+### Offline Access
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+Once installed, the app works offline, thanks to the **service worker**. You can:
 
-## Code of Conduct
+-   View previously loaded tournaments.
+-   Add new players and scores (data will sync when you're back online).
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+## How to Use 🚀
 
-## Security Vulnerabilities
+### 1. Create a Tournament
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+-   Click the **Create Tournament** button.
+-   Enter the tournament date and number of boards.
 
-## License
+### 2. Add Players
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+-   Use the **Add Player** button to add players to the tournament.
+
+### 3. Start Matches
+
+-   Assign players to groups and start matches.
+-   Enter scores for each match.
+
+### 4. View Results
+
+-   Check the **Leaderboard** to see player rankings.
+-   View the **Tournament Bracket** to see who advances to the next round.
+
+## Technologies Used 💻
+
+-   **Frontend**: HTML, CSS, JavaScript, Bootstrap, Tailwind CSS
+-   **Backend**: Laravel (PHP)
+-   **Database**: MySQL
+-   **PWA**: Manifest file, Service Worker
+
+## Screenshots 📸
+
+### Homepage
+
+![Homepage](screenshots/homepage.png)
+
+### Tournament Page
+
+![Tournament Page](screenshots/tournament.png)
+
+### Leaderboard
+
+![Leaderboard](screenshots/leaderboard.png)
+
+## Contributing 🤝
+
+Contributions are welcome! If you'd like to contribute to this project, please follow these steps:
+
+1. Fork the repository.
+2. Create a new branch (`git checkout -b feature/YourFeatureName`).
+3. Commit your changes (`git commit -m 'Add some feature'`).
+4. Push to the branch (`git push origin feature/YourFeatureName`).
+5. Open a pull request.
+
+## License 📄
+
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
+
+---
+
+Enjoy your pool sessions with the **Pool Billiard Tournament Tracker**! 🎉
