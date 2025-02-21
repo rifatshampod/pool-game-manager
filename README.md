@@ -1,6 +1,6 @@
 # Pool Billiard Tournament Tracker 🎱
 
-Welcome to the **Pool Billiard Tournament Tracker**! This project was born out of the need to organize friendly pool billiard competitions among friends. With limited boards available, we wanted a way to track scores, manage tournaments, and determine winners without the hassle of manual tracking. This software solution makes it easy to organize and enjoy our weekly pool sessions!
+Welcome to the **Pool Billiard Tournament Tracker**! This project was born out of the need to organize friendly pool billiard competitions among friends in a billiard bar called "Pocket Bar" in Turku, Finland. With limited boards available, we wanted a way to track scores, manage tournaments, and determine winners without the hassle of manual tracking. This software solution makes it easy to organize and enjoy our weekly pool sessions!
 
 ## Features ✨
 
