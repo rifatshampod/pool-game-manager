@@ -16,47 +16,26 @@
     <div class="text-center">
         <h3>Leaderboard</h3>
     </div>
-    <div>
-      Coming Soon!
-    </div>
-    {{-- <div class="table-responsive leaderboard-table">
+    <div class="table-responsive leaderboard-table">
       <table class="table table-bordered table-hover shadow">
         <thead class="table-dark">
-          <tr>
-            <th scope="col">Position</th>
-            <th scope="col">Player</th>
-            <th scope="col">Points</th>
-          </tr>
+            <tr>
+                <th scope="col">Position</th>
+                <th scope="col">Player</th>
+                <th scope="col">Points</th>
+            </tr>
         </thead>
         <tbody>
-          <tr>
-            <td>1</td>
-            <td>Player 1</td>
-            <td>100</td>
-          </tr>
-          <tr>
-            <td>2</td>
-            <td>Player 2</td>
-            <td>90</td>
-          </tr>
-          <tr>
-            <td>3</td>
-            <td>Player 3</td>
-            <td>80</td>
-          </tr>
-          <tr>
-            <td>4</td>
-            <td>Player 4</td>
-            <td>70</td>
-          </tr>
-          <tr>
-            <td>5</td>
-            <td>Player 5</td>
-            <td>60</td>
-          </tr>
+            @foreach ($leaderboard as $index => $player)
+                <tr>
+                    <td>{{ $index + 1 }}</td>
+                    <td>{{ $player->name }}</td>
+                    <td>{{ $player->total_points }}</td>
+                </tr>
+            @endforeach
         </tbody>
-      </table>
-    </div> --}}
+    </table>
+    </div>
 
      <h1 class="text-center mb-4" style="color: #2c3e50;">Tournament List</h1>
 
