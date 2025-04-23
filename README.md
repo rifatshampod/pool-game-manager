@@ -33,7 +33,7 @@ The app is a **Progressive Web App (PWA)**, which means you can install it on yo
 
 ### Install the App
 
-1. Open the app in your browser (Chrome, Edge, or Safari).
+1. Open the URL: https://pool.rifatshampod.com/ in your browser (Chrome, Edge, or Safari).
 2. Click the **Install** button (or the "Add to Home Screen" option in the browser menu).
 3. The app will be installed on your device, and you can access it like a native app.
 
